@@ -94,7 +94,7 @@ int main(int, char **) {
 
     // Our state
     bool show_main_window = true;
-    bool show_demo_window = true;
+    bool show_demo_window = false;
     bool show_another_window = false;
     bool visibility_toggled = true;
 
