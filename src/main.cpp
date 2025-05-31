@@ -61,8 +61,8 @@ int main(int, char **) {
     // io.ConfigViewportsNoTaskBarIcon = true;
 
     // Setup Dear ImGui style
-    ImGui::StyleColorsClassic();
-    //ImGui::StyleColorsLight();
+//    ImGui::StyleColorsClassic();
+    ImGui::StyleColorsDark();
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle &style = ImGui::GetStyle();
@@ -95,8 +95,9 @@ int main(int, char **) {
     // Our state
     bool show_main_window = true;
     bool show_demo_window = false;
+    bool show_app1_window = false;
     bool show_another_window = false;
-    bool visibility_toggled = true;
+    bool menu_visibility_toggled = true;
 
     ImVec4 clear_color = ImVec4(0.30f, 0.35f, 0.4f, 1.00f);
 
@@ -130,12 +131,13 @@ int main(int, char **) {
         ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
         if (ImGui::IsKeyPressed(ImGuiKey_F10, false)) {
-            visibility_toggled = !visibility_toggled;
+            menu_visibility_toggled = !menu_visibility_toggled;
         }
-        if (visibility_toggled) {
+        if (menu_visibility_toggled) {
             if (ImGui::BeginMainMenuBar()) {
                 if (ImGui::BeginMenu("Test Apps")) {
                     ImGui::MenuItem("Demo Window", nullptr, &show_demo_window, true);
+                    ImGui::MenuItem("App1 Window", nullptr, &show_app1_window, true);
                     ImGui::EndMenu();
                 }
                 ImGui::EndMainMenuBar();
@@ -157,7 +159,7 @@ int main(int, char **) {
             }
 
             // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-            {
+            if (show_app1_window) {
                 static float f = 0.0f;
                 static int counter = 0;
 
