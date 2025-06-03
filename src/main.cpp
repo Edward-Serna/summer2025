@@ -7,8 +7,8 @@
 #include "imgui_impl_opengl3.h"
 #include <stdio.h>
 #include <SDL.h>
-#undef main
 #include <SDL_opengl.h>
+#undef main
 
 int main(int, char **) {
     // Setup SDL
@@ -25,14 +25,13 @@ int main(int, char **) {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
 
-
     // Create window with graphics context
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
     SDL_WindowFlags window_flags = (SDL_WindowFlags) (
         SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
-    SDL_Window *window = SDL_CreateWindow("Summer 2025", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 925,
+    SDL_Window *window = SDL_CreateWindow("Summer 2025", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 900,
                                           window_flags);
     if (window == nullptr) {
         printf("Error: SDL_CreateWindow(): %s\n", SDL_GetError());
@@ -63,7 +62,6 @@ int main(int, char **) {
     // Setup Dear ImGui style
 //    ImGui::StyleColorsClassic();
     ImGui::StyleColorsDark();
-
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle &style = ImGui::GetStyle();
     if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable) {
@@ -94,7 +92,7 @@ int main(int, char **) {
 
     // Our state
     bool show_main_window = true;
-    bool show_demo_window = false;
+    bool show_demo_window = true;
     bool show_app1_window = false;
     bool show_another_window = false;
     bool menu_visibility_toggled = true;
@@ -156,6 +154,9 @@ int main(int, char **) {
             // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
             if (show_demo_window) {
                 ImGui::ShowDemoWindow(&show_demo_window);
+//                ImGui::ShowStackToolWindow(&show_demo_window);
+//                ImGui::ShowMetricsWindow(&show_demo_window);
+//                ImGui::ShowFontSelector("label");
             }
 
             // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
