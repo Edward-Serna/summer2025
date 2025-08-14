@@ -8,7 +8,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_BINARY_DIR}/bin)
 set(SDL_STATIC ON)
-add_subdirectory(thirdparty/sdl)
+# add_subdirectory(thirdparty/sdl)
 
 find_package(OpenGL REQUIRED)
 
@@ -32,6 +32,5 @@ target_include_directories(summer2025 PUBLIC
         ${OPENGL_INCLUDE_DIR}
         ${PROJECT_SOURCE_DIR}/thirdparty/imgui
         ${PROJECT_SOURCE_DIR}/thirdparty/imgui/backends
-        ${PROJECT_SOURCE_DIR}/thirdparty/imgui/misc/fonts/Roboto-Medium.ttf
         ${PROJECT_SOURCE_DIR}/thirdparty/sdl/include
 )
