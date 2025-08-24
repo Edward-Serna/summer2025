@@ -1,10 +1,10 @@
 # Summer 2025
-This project uses the **SDL2** for window initialization and input management, and **OpenGL3** for rendering API. Our 
+This project uses the **SDL3** for window initialization and input management, and **OpenGL3** for rendering API. Our 
 goal is to create our own application that implements the key systems for game development, such as rendering 
 pipelines, input handling, scene management, GUI integration, and more.
 
 ## Documentation
-* Standard DirectMedia Layer 2 (**SDL2**) [[here](https://wiki.libsdl.org/SDL2/FrontPage)]
+* Standard DirectMedia Layer 3 (**SDL3**) [[here](https://wiki.libsdl.org/SDL3/FrontPage)]
 * **ImGui** Repository [[here](git@github.com:ocornut/imgui.git)]
 
 ## Pre-Requisites
