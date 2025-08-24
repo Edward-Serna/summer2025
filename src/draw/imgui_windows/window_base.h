@@ -21,9 +21,13 @@ public:
 
     const std::string& GetTitle()  { return _title; }
     ImGuiWindowFlags GetFlags()  { return _flags; }
+    ImVec2 GetPosition() const { return _position; }
+    ImVec2 GetSize() const { return _size; }
 
     void SetFlags(ImGuiWindowFlags flags) { _flags = flags; }
     void SetTitle(const std::string& title) { _title = title; }
+    void SetPosition(const ImVec2& position) { _position = position; }
+    void SetSize(const ImVec2& size) { _size = size; }
 
 protected:
     virtual void draw_window() = 0; // NEEDS to be overwritten in child class
@@ -33,4 +37,6 @@ private:
     bool _visible = true;
     ImGuiWindowFlags _flags;
 
+    ImVec2 _position;
+    ImVec2 _size = { 200, 200 };
 };

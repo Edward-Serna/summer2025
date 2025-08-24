@@ -18,8 +18,7 @@ app::app() {
 	InitializeWindows();
 }
 
-void app::InitializeWindows() const
-{
+void app::InitializeWindows() const {
 	_imgui_window_manager->AddWindow<settings_window>("Settings");
 }
 
@@ -112,15 +111,10 @@ bool app::start_renderer() {
 }
 
 void app::render_loop() const {
-	// Main configuration and I/O between your application and ImGui (also see: ImGuiPlatformIO)
-    ImGuiIO &io = ImGui::GetIO();
-    // Background Color
-    ImVec4 bgColor = ImVec4(0.30f, 0.35f, 0.4f, 1.00f);
+    ImGuiIO &io = ImGui::GetIO(); // Main configuration and I/O between your application and ImGui (also see: ImGuiPlatformIO)
+    ImVec4 bgColor = ImVec4(0.30f, 0.35f, 0.4f, 1.00f);// Background Color
 
-	bool show_main_window = false;
 	bool show_demo_window = false;
-	bool show_app1_window = false;
-	bool show_another_window = false;
 	bool menu_visibility_toggled = true;
 	bool done = false;
 
@@ -138,26 +132,14 @@ void app::render_loop() const {
         ImGui_ImplSDL3_NewFrame();
         ImGui::NewFrame();
 
-    	float scale_factor = io.DisplaySize.y / 1080.0f;
-    	io.FontGlobalScale = std::max(0.85f, scale_factor);
+    	io.FontGlobalScale = std::max(0.85f, io.DisplaySize.y / 1080.0f);
 
-    	if (io.KeyCtrl) {
-    		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Turn On
-    	} else {
-    		io.ConfigFlags &= ~ImGuiConfigFlags_DockingEnable; // Turn Off
-    	}
     	ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
 
-        if (ImGui::IsKeyPressed(ImGuiKey_F10)) {
-            menu_visibility_toggled = !menu_visibility_toggled;
-        }
+        if (ImGui::IsKeyPressed(ImGuiKey_F10)) { menu_visibility_toggled = !menu_visibility_toggled; }
+
     	if (menu_visibility_toggled) {
     		if (ImGui::BeginMainMenuBar()) {
-    			if (ImGui::BeginMenu("Test Apps")) {
-    				ImGui::MenuItem("Demo Window", nullptr, &show_demo_window, true);
-    				ImGui::MenuItem("App1 Window", nullptr, &show_app1_window, true);
-    				ImGui::EndMenu();
-    			}
     			window_base* settings_window = _imgui_window_manager->GetWindow("Settings");
     			bool visible = settings_window->IsVisible();
     			if (ImGui::MenuItem(settings_window->GetTitle().c_str(), nullptr, &visible)) {
@@ -169,51 +151,7 @@ void app::render_loop() const {
 
     	_imgui_window_manager->RenderAll();
 
-        static ImGuiWindowFlags imgui_window_flags =
-                ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse |
-                ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNav | ImGuiWindowFlags_NoBackground |
-                ImGuiWindowFlags_NoTitleBar ;
-        const ImGuiViewport *viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(show_main_window ? viewport->WorkPos : viewport->Pos);
-        ImGui::SetNextWindowSize(show_main_window ? viewport->WorkSize : viewport->Size);
-
-        if (ImGui::Begin("Main Window", &show_main_window, imgui_window_flags)) {
-            if (show_demo_window) {
-                ImGui::ShowDemoWindow(&show_demo_window);
-            }
-
-            if (show_app1_window) {
-                static float f = 0.0f;
-                static int counter = 0;
-
-                ImGui::Begin("Hello, world!");
-
-                ImGui::Text("This is some useful text.");
-                ImGui::Checkbox("Demo Window", &show_demo_window);
-                ImGui::Checkbox("Another Window", &show_another_window);
-
-                ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-                ImGui::ColorEdit3("clear color", (float *) &bgColor);
-
-                if (ImGui::Button("Button"))
-                    counter++;
-                ImGui::SameLine();
-                ImGui::Text("counter = %d", counter);
-
-                ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-                ImGui::End();
-            }
-
-            // 3. Show another simple window
-            if (show_another_window) {
-                ImGui::Begin("Another Window", &show_another_window);
-                ImGui::Text("Hello from another window!");
-                if (ImGui::Button("Close Me"))
-                    show_another_window = false;
-                ImGui::End();
-            }
-            ImGui::End();
-        }
+    	ImGui::ShowDemoWindow(&show_demo_window);
 
         ImGui::Render();
 
